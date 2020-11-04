@@ -12,11 +12,9 @@ public class SuperArray {
 
   public boolean add(String element) {
     if (this.size() == data.length) {
-      return false;
+      this.resize();
     }
-    else {
-      this.add(element);
-    }
+    this.add(element);
     return true;
   }
 
