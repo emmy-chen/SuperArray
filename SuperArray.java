@@ -1,17 +1,35 @@
 public class SuperArray {
-  private String [] data;
+  private String[] data;
   private int size;
 
   public SuperArray() {
-    String[] superArray= new String[10];
+    data = new String[10];
   }
 
   public int size() {
     return (this.size);
   }
 
-  //public String get(int index)
-  //public String set(int index, String element)
-  //private void grow() / resize()
-  //public boolean add(String element)
+  public boolean add(String element) {
+    if (this.size() == data.length) {
+      return false;
+    }
+    else {
+      this.add(element);
+    }
+    return true;
+  }
+
+  public String get(int index) {
+    return (data[index]);
+  }
+
+  private void resize() {
+    String[] data2 = new String[data.length + 1];
+    for (int i = 0; i < data.length; i++) {
+      data2[i] = data[i];
+    }
+    data = data2;
+  }
+
 }
