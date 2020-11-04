@@ -20,10 +20,6 @@ public class SuperArray {
     return true;
   }
 
-  public String get(int index) {
-    return (data[index]);
-  }
-
   private void resize() {
     String[] data2 = new String[data.length + 1];
     for (int i = 0; i < data.length; i++) {
