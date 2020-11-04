@@ -1,20 +1,34 @@
 public class SuperArray {
+  public static void main(String[] args) {
+  }
   private String[] data;
   private int size;
 
   public SuperArray() {
     data = new String[10];
+    size = 10;
   }
 
   public int size() {
-    return (this.size);
+    int count = 0;
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] != null) {
+        count++;
+      }
+    }
+    return count;
   }
 
   public boolean add(String element) {
     if (this.size() == data.length) {
       this.resize();
     }
-    this.add(element);
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] == (null)) {
+        data[i] = element;
+        return true;
+      }
+    }
     return true;
   }
 
@@ -35,5 +49,22 @@ public class SuperArray {
     }
     data = data2;
   }
+
+  public boolean isEmpty() {
+    return (this.size() == 0);
+  }
+
+  //public void clear() {
+
+  //public String toString() {
+
+//  public boolean contains(String s) {
+//    for (int i = 0; i < data.length; i++) {
+//      if (data[i] == s) {
+//        return true;
+//      }
+//    }
+//    return false;
+//  }
 
 }
