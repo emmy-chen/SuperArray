@@ -54,34 +54,48 @@ public class SuperArray {
     return (this.size() == 0);
   }
 
-    public void clear() {
-      for(int i = 0; i < data.length; i++){
-        data[i] = null;
+  public void clear() {
+    for(int i = 0; i < data.length; i++){
+      data[i] = null;
+    }
+  }
+
+  public String toString() {
+    String str = "";
+    str  += ("[" + data[0]);
+    for (int i = 1; i < (this.size() - 1); i++) {
+      str  += (", " + data[i]);
+    }
+    str  += ("]");
+    return str;
+  }
+
+  public boolean contains(String s) {
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] == s) {
+        return true;
       }
     }
+    return false;
+  }
 
-    public String toString() {
-      String str = "";
-      str  += ("[" + data[0]);
-      for (int i = 1; i < (this.size() - 1); i++) {
-        str  += (", " + data[i]);
-      }
-      str  += ("]");
-      return str;
+  public SuperArray(int initialCapacity) {
+    data = new String[initialCapacity];
+    size = initialCapacity;
+  }
+
+  public void add(int index, String element) {
+    if (this.size() == data.length) {
+      this.resize();
     }
-
-    public boolean contains(String s) {
-      for (int i = 0; i < data.length; i++) {
-        if (data[i] == s) {
-          return true;
-        }
-      }
-      return false;
+    String[] data2 = new String[data.length];
+    for (int i = 0; i < index; i++) {
+      data2[i] = data[i];
     }
-
-    public SuperArray(int initialCapacity) {
-      data = new String[initialCapacity];
-      size = initialCapacity;
+    data2[index] = element;
+    for (int i = (index + 1); i < this.size; i++){
+      data2[i + 1] = data[i];
     }
-
+    data = data2;
+  }
 }
