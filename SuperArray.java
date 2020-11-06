@@ -120,4 +120,12 @@ public class SuperArray {
     }
     return -1;
   }
+
+  public String[] toArray() {
+    String[] copy = new String[this.size];
+    for (int i = 0; i < this.size; i++) {
+      copy [i] = data[i];
+    }
+    return copy;
+  }
 }
