@@ -94,15 +94,15 @@ public class SuperArray {
     if (this.size() == data.length) {
       this.resize();
     }
-    String[] data2 = new String[data.length];
+    String[] before = new String[data.length + 1];
     for (int i = 0; i < index; i++) {
-      data2[i] = data[i];
+      before[i] = data[i];
     }
-    data2[index] = element;
-    for (int i = (index + 1); i < this.size; i++){
-      data2[i + 1] = data[i];
+    before[index] = element;
+    for (int i = index; i < data.length; i++) {
+      before[i+1] = data[i];
     }
-    data = data2;
+    data = before;
   }
 
   public String remove(int index) {
@@ -111,15 +111,15 @@ public class SuperArray {
     for (int i = 0; i < index; i++) {
       data2[i] = data[i];
     }
-    for (int i = index; i < this.size; i++){
-      data2[i] = data[i + 1];
+    for (int i = index + 1; i < data.length; i++) {
+      data2[i - 1] = data[i];
     }
     data = data2;
     return val;
   }
 
   public int indexOf(String s) {
-    for (int i = 0; i < this.size; i++) {
+    for (int i = 0; i < this.size(); i++) {
       if (data[i].equals(s)) {
         return i;
       }
