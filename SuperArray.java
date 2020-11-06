@@ -55,10 +55,22 @@ public class SuperArray {
   }
 
     public void clear() {
-      SuperArray data = new SuperArray();
+      for(int i = 0; i < data.length; i++){
+        data[i] = null;
+      }
     }
 
-}
+    public String toString() {
+      String str = "";
+      str  += ("[" + data[0]);
+      for (int i = 1; i < (this.size() - 1); i++) {
+        str  += (", " + data[i]);
+      }
+      str  += ("]");
+      return str;
+    }
+
+
 
 //  public boolean contains(String s) {
 //    for (int i = 0; i < data.length; i++) {
