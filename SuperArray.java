@@ -43,7 +43,7 @@ public class SuperArray {
   }
 
   private void resize() {
-    String[] data2 = new String[data.length + 1];
+    String[] data2 = new String[data.length * 2];
     for (int i = 0; i < data.length; i++) {
       data2[i] = data[i];
     }
@@ -54,9 +54,11 @@ public class SuperArray {
     return (this.size() == 0);
   }
 
-  //public void clear() {
+    public void clear() {
+      SuperArray data = new SuperArray();
+    }
 
-  //public String toString() {
+}
 
 //  public boolean contains(String s) {
 //    for (int i = 0; i < data.length; i++) {
