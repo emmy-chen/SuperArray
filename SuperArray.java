@@ -61,9 +61,12 @@ public class SuperArray {
   }
 
   public String toString() {
+    if (this.size() == 0) {
+      return "[]";
+    }
     String str = "";
     str  += ("[" + data[0]);
-    for (int i = 1; i < (this.size() - 1); i++) {
+    for (int i = 1; i < this.size(); i++) {
       str  += (", " + data[i]);
     }
     str  += ("]");
@@ -71,8 +74,11 @@ public class SuperArray {
   }
 
   public boolean contains(String s) {
-    for (int i = 0; i < data.length; i++) {
-      if (data[i] == s) {
+    if (this.size() == 0) {
+      return false;
+    }
+    for (int i = 0; i < this.size(); i++) {
+      if (data[i].equals(s)) {
         return true;
       }
     }
@@ -114,7 +120,7 @@ public class SuperArray {
 
   public int indexOf(String s) {
     for (int i = 0; i < this.size; i++) {
-      if (data[i] == s) {
+      if (data[i].equals(s)) {
         return i;
       }
     }
