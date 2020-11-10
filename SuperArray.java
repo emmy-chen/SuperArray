@@ -152,14 +152,4 @@ public class SuperArray {
     }
     return copy;
   }
-
-  public static void removeDuplicates(SuperArray s) {
-    for (int i = 0; i < s.size() - 1; i++) {
-      if (s.get(i).equals(s.get(i + 1))) {
-        s.remove(i + 1);
-        i--;
-      }
-    }
-  }
-
 }
