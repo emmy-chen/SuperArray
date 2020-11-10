@@ -50,6 +50,12 @@ public class Demo{
     return true;
   }
 
-
+  public static SuperArray zip(SuperArray a, SuperArray b){
+    for (int i = 0; i < a.size(); i++) {
+      merge.add(a[i]);
+      merge.add(b[i]);
+    }
+    return (merge.toString());
+  }
 
 }
