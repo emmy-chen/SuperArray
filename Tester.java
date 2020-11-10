@@ -1,24 +1,8 @@
 import java.util.Arrays;
-public class Tester {
-    public static void main(String[] args) {
-        SuperArray words = new SuperArray();
-        words.add("kani");
-        words.add("uni");
-        words.add("ebi");
-        for(int i = 0; i < words.size(); i++){
-            System.out.println( words.get(i) );
-        }
+//This is a fork of my original test case, which Phillip Von Mueffling edited down to within the parameter input constraints Mr. K provided.
+public class RengZhengTestCasesRevised {
 
-        for(int i = 0; i < 10; ++i) {
-            words.add("mhm");
-        }
-
-        for(int i = 0; i < words.size(); ++i) {
-            if(!words.get(i).equals("mhm")) {
-                System.out.println("Don't say " + words.set(i, "hmh") + "!");
-            }
-            System.out.println( words.get(i) );
-        }
+  public static void main(String[] args) {
     System.out.println("SuperArray Tester");
     boolean failure = false;
     failure = constructorTester() || failure;
@@ -35,12 +19,15 @@ public class Tester {
     failure = removeTester() || failure;
     failure = indexOfTester() ||failure;
     failure = toArrayTester() || failure;
+    //failure = removeDuplicatesTester() || failure;
+    failure = lastIndexOfTester() || failure;
+    failure = equalsTester() || failure;
 
     System.out.println("\n ~~~ Overall Result ~~~");
     if (failure) {
       System.out.println("Is that blue smoke?");
     } else {
-      System.out.println("All's good in the neighborhood");
+      System.out.println("All's good in the neighbourhood");
     }
   }
 
@@ -427,7 +414,7 @@ public class Tester {
       //System.out.println("Your array doesn't think it has null values even with holes in the static!");
     }
 
-*/
+    */
     methodMessage("contains()", failure);
     return failure;
   }
@@ -459,11 +446,11 @@ public class Tester {
       //test.add(-1, "0");
       //failure = true;
       //System.out.println("Someone added to a negative index.");
-  //  } catch (Exception e) {
+    //} catch (Exception e) {
       //System.out.println("Yup, can't add to a negative index.");
-  //  }
+    //}
 
-  /*  try {
+    /*try {
       test.add(0, "0");
       failure = true;
       System.out.println("Inserting at out of bounds index!");
@@ -586,8 +573,8 @@ public class Tester {
         System.out.println("You're adding out of index, kid. You shouldn't.");
       }
       expectedSize++;
-    }
-*/
+    }*/
+
     methodMessage("addAtIndex()", failure);
     return failure;
   }
@@ -596,7 +583,7 @@ public class Tester {
     System.out.println("\n ~~~ remove() TESTER");
     boolean failure = false;
     SuperArray test = new SuperArray();
-    System.out.println("Testing negative and out of bounds methods.");
+    /*System.out.println("Testing negative and out of bounds methods.");
     try {
       test.remove(-1);
       failure = true;
@@ -619,7 +606,7 @@ public class Tester {
       System.out.println("Removing at out of bounds index!");
     } catch (Exception e) {
       //System.out.println("Yup, can't remove something out of index 2.");
-    }
+    }*/
 
     System.out.println("\nTesting actual removals: Extremities");
     test = defaultTestArray();
@@ -674,7 +661,7 @@ public class Tester {
     };
     expectedArrays = newExpecteds;
 
-  /*  for (int index = 0; index < indexToRemove.length; index++) {
+    /*for (int index = 0; index < indexToRemove.length; index++) {
       test.set(indexToRemove[index], null);
       try {
         //System.out.println(test.toString());
@@ -739,8 +726,8 @@ public class Tester {
         System.out.println("You're adding out of index, kid. You shouldn't.");
       }
       expectedSize--;
-    }
-*/
+    }*/
+
     methodMessage("remove()", failure);
     return failure;
   }
@@ -799,7 +786,7 @@ public class Tester {
     }
 
     System.out.println("\nTesting with mixed goods: holes in array");
-  System.out.println("Testing with holes set by set()");
+    System.out.println("Testing with holes set by set()");
     int[] expectedOutput = {
       -1,
       0,
@@ -810,7 +797,7 @@ public class Tester {
       4,
       -1
     };
-    /* test.set(0, null);
+    /*test.set(0, null);
     test.set(7, null);
     test.set(4, null);
     for (int index = 0; index < toFind.length; index++) {
@@ -820,8 +807,7 @@ public class Tester {
         failure = true;
         errorMessage(index, "" + expectedOutput[index], "" + test.indexOf(toFind[index]));
       }
-    }
-*/
+    }*/
     System.out.println("Testing with holes set by remove()");
     test = defaultTestArray();
     test.remove(7);
@@ -834,6 +820,17 @@ public class Tester {
         failure = true;
         errorMessage(index, "" + expectedOutput[index], "" + test.indexOf(toFind[index]));
       }
+    }
+
+    System.out.println("Now for the same elements");
+    SuperArray allSameTest = new SuperArray();
+    allSameTest.add("foo");
+    allSameTest.add("foo");
+    if (allSameTest.indexOf("foo") == 0) {
+      //passMessage(0);
+    } else {
+      failure = true;
+      errorMessage(0, "" + 1, "" + allSameTest.indexOf("foo"));
     }
 
     methodMessage("indexOf()", failure);
@@ -906,4 +903,211 @@ public class Tester {
     return failure;
   }
 
+  /*public static boolean removeDuplicatesTester() {
+    System.out.println("\n ~~~ removedDuplicates() TESTER ~~~");
+    boolean failure = false;
+    SuperArray[] tests = {
+      new SuperArray(),//tests empty
+      defaultTestArray(),//tests nonoverlap
+      new SuperArray(),//tests all same
+      new SuperArray(),//tests just 1
+      defaultTestArray()//tests extremities simultaneously
+    };
+    int[] expectedSizes = {
+      0,
+      8,
+      1,
+      1,
+      7,
+    };
+    String[] expectedStringOutputs = {
+      "[]",
+      "[test0, test1, test2, test3, test4, test5, test6, test7]",
+      "[foo]",
+      "[foo]",
+      "[test0, test1, test2, test3, test4, test5, test6]"
+    };
+    for (int index = 0; index < 8; index++) {                         //sets a SuperArray to just "foo"
+      tests[2].add("foo");
+    }
+    tests[3].add("foo");
+    tests[4].set(7, "test0");
+
+    for (SuperArray test : tests) {
+      SuperArray.removeDuplicates(test);
+    }
+
+    for (int index = 0; index < tests.length; index++) {
+      boolean caseFailure = false;
+      if (tests[index].size() == expectedSizes[index]) {
+        //System.out.println("Size for test case " + index + " checks out.");
+      } else {
+        caseFailure = true;
+        errorMessage(index, "" + expectedSizes[index], "" + tests[index].size());
+      }
+
+      if (tests[index].toString().equals(expectedStringOutputs[index])) {
+        //System.out.println("String for test case " + index + " checks out.");
+      } else {
+        caseFailure = true;
+        errorMessage(index, "" + expectedStringOutputs[index], "" + tests[index].toString());
+      }
+
+      if (caseFailure) {
+        errorMessage(index, "Check above", "Check above");
+      } else {
+        //passMessage(index);
+      }
+
+      failure = caseFailure || failure;
+    }
+
+    methodMessage("removeDuplicates()", failure);
+    return failure;
+  }*/
+
+  public static boolean lastIndexOfTester() {
+    System.out.println("\n ~~~ lastIndexOf() TESTER ~~~");
+    boolean failure = false;
+    SuperArray test = new SuperArray();
+    String[] toFind = {
+      "test8",
+      "aardvark",
+      null,
+      ""
+    };
+
+    System.out.println("Testing known bads with empty Array.");
+    for (int index = 0; index < toFind.length; index++) {
+      if (test.lastIndexOf(toFind[index]) == -1) {
+        //passMessage(index);
+      } else {
+        failure = true;
+        errorMessage(index, "-1", "" + test.lastIndexOf(toFind[index]));
+      }
+    }
+
+    System.out.println("\nTesting known bads with occupied Array.");
+    test = defaultTestArray();
+    for (int index = 0; index < toFind.length; index++) {
+      if (test.lastIndexOf(toFind[index]) == -1) {
+        //passMessage(index);
+      } else {
+        failure = true;
+        errorMessage(index, "-1", "" + test.lastIndexOf(toFind[index]));
+      }
+    }
+
+    System.out.println("\nTesting with known goods: continuous array");
+    String[] toFind2 = {
+      "test0",
+      "test1",
+      "test2",
+      "test3",
+      "test4",
+      "test5",
+      "test6",
+      "test7"
+    };
+    toFind = toFind2;
+    for (int index = 0; index < toFind.length; index++) {
+      if (test.lastIndexOf(toFind[index]) == index) {
+        //passMessage(index);
+      } else {
+        failure = true;
+        errorMessage(index, "" + index, "" + test.lastIndexOf(toFind[index]));
+      }
+    }
+
+    System.out.println("\nTesting with mixed goods: holes in array");
+    int[] expectedOutput = {
+      -1,
+      0,
+      1,
+      2,
+      -1,
+      3,
+      4,
+      -1
+    };
+
+    System.out.println("Testing with holes set by remove()");
+    test = defaultTestArray();
+    test.remove(7);
+    test.remove(4);
+    test.remove(0);
+    for (int index = 0; index < toFind.length; index++) {
+      if (test.lastIndexOf(toFind[index]) == expectedOutput[index]) {
+        //passMessage(index);
+      } else {
+        failure = true;
+        errorMessage(index, "" + expectedOutput[index], "" + test.lastIndexOf(toFind[index]));
+      }
+    }
+
+    System.out.println("Now for the same elements");
+    SuperArray allSameTest = new SuperArray();
+    allSameTest.add("foo");
+    allSameTest.add("foo");
+    if (allSameTest.lastIndexOf("foo") == 1) {
+      //passMessage(0);
+    } else {
+      failure = true;
+      errorMessage(0, "" + 1, "" + allSameTest.lastIndexOf("foo"));
+    }
+
+    methodMessage("lastIndexOf()", failure);
+    return failure;
+  }
+
+  public static boolean equalsTester() {
+    System.out.println("\n ~~~ equals() TESTER ~~~");
+    boolean failure = false;
+    SuperArray a = new SuperArray();
+    SuperArray b = new SuperArray();
+    if (a.equals(b)) {
+      //passMessage(0);
+    } else {
+      errorMessage(0, "" + true, "" + a.equals(b));
+    }
+
+    b = defaultTestArray();
+    if (!a.equals(b)) {
+      //passMessage(1);
+    } else {
+      errorMessage(1, "" + true, "" + a.equals(b));
+    }
+
+    a = defaultTestArray();
+    b = new SuperArray();
+    if (!a.equals(b)) {
+      //passMessage(2);
+    } else {
+      errorMessage(2, "" + true, "" + a.equals(b));
+    }
+
+    b = defaultTestArray();
+    if (a.equals(b)) {
+      //passMessage(3);
+    } else {
+      errorMessage(3, "" + true, "" + a.equals(b));
+    }
+
+    b.set(7, "foo");
+    if (!a.equals(b)) {
+      //passMessage(4);
+    } else {
+      errorMessage(4, "" + true, "" + a.equals(b));
+    }
+
+    b.remove(7);
+    if (!a.equals(b)) {
+      //passMessage(5);
+    } else {
+      errorMessage(5, "" + true, "" + a.equals(b));
+    }
+
+    methodMessage("equals()", failure);
+    return failure;
+  }
 }
