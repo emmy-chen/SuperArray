@@ -1,5 +1,6 @@
 public class Demo{
   public static void removeDuplicates(SuperArray s) {
+    try {
     for  (int i = 0; i < s.size(); i++) {
       for (int j = i + 1; j < s.size(); j++) {
         if (s[i] == s[j]) {
@@ -7,6 +8,10 @@ public class Demo{
         }
       }
     }
+  }
+  catch (IllegalArgumentException e){
+    System.out.println ("IllegalArgumentException")
+  }
   }
 
   public static void main(String[]args){
