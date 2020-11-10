@@ -41,6 +41,15 @@ public class Demo{
     return -1;
   }
 
-  //public boolean equals(SuperArray other){ }
+  public boolean equals(SuperArray other){
+    for (int i = 0; i < this.size(); i++) {
+      if (this[i] != other[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
 
 }
