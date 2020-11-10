@@ -32,4 +32,15 @@ public class Demo{
     return (dupes.toString());
   }
 
+  public int lastIndexOf(String value){
+    for (int i = -this.size(); i >= 0; i--) {
+      if (a[i].equals(value)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  //public boolean equals(SuperArray other){ }
+
 }
