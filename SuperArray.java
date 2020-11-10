@@ -107,13 +107,23 @@ public class SuperArray {
 
   public String remove(int index) {
     String val = data[index];
-    String[] data2 = new String[data.length];
+    if (index < 0 || index >= data.length) {
+      return val;
+    }
+    String[] data2 = new String[data.length - 1];
+    for (int i = 0, k = 0; i < data.length; i++) {
+      if (i != index) {
+        data2[k++] = data[i];
+      }
+    }
+    /*
     for (int i = 0; i < index; i++) {
       data2[i] = data[i];
     }
-    for (int i = index + 1; i < data.length; i++) {
-      data2[i - 1] = data[i];
+    for (int i = index; i < data.length; i++) {
+      data2[i] = data[i + 1];
     }
+    */
     data = data2;
     return val;
   }
@@ -128,10 +138,28 @@ public class SuperArray {
   }
 
   public String[] toArray() {
-    String[] copy = new String[this.size];
-    for (int i = 0; i < this.size; i++) {
-      copy [i] = data[i];
+    int s = 0;
+    for (int i = 0; i< this.size; i++) {
+      if (data[i] != null) {
+        s++;
+      }
+    }
+    String[] copy = new String[s];
+    for (int i = 0; i < s; i++) {
+      if (data[i] != null) {
+        copy [i] = data[i];
+      }
     }
     return copy;
   }
+
+  public static void removeDuplicates(SuperArray s) {
+    for (int i = 0; i < s.size() - 1; i++) {
+      if (s.get(i).equals(s.get(i + 1))) {
+        s.remove(i + 1);
+        i--;
+      }
+    }
+  }
+
 }
