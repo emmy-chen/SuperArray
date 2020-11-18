@@ -37,30 +37,6 @@ public class Demo{
     return dupes;
   }
 
-  public int lastIndexOf(String value){
-
-    /*
-    for (int i = -this.size; i >= 0; i--) {
-      if (this.get(i).equals(value)) {
-        return i;
-      }
-    }
-    return -1;
-    */
-  }
-
-  public boolean equals(SuperArray other){
-    if (this.size() != other.size()) {
-      return false;
-    }
-    for (int i = 0; i < other.size(); i++) {
-      if (other.get(i) != this.get(i)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   public static SuperArray zip(SuperArray a, SuperArray b){
     SuperArray merge = new SuperArray();
     for (int i = 0; i < a.size(); i++) {
