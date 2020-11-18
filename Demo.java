@@ -3,14 +3,14 @@ public class Demo{
     try {
     for  (int i = 0; i < s.size(); i++) {
       for (int j = i + 1; j < s.size(); j++) {
-        if (s[i] == s[j]) {
-          s.remove(i);
+        if (s.get(i) == s.get(j)) {
+          s.remove(j);
         }
       }
     }
   }
   catch (IllegalArgumentException e){
-    System.out.println ("IllegalArgumentException")
+    System.out.println ("IllegalArgumentException");
   }
   }
 
@@ -29,26 +29,32 @@ public class Demo{
   public static SuperArray findOverlap(SuperArray a, SuperArray b) {
     SuperArray dupes = new SuperArray();
     for (int i = 0; i < a.size(); i++) {
-      if (b.contains(a[i])) {
-        dupes.add(a[i]);
+      if (b.contains(a.get(i))) {
+        dupes.add(a.get(i));
       }
     }
     removeDuplicates(dupes);
-    return (dupes.toString());
+    return dupes;
   }
 
   public int lastIndexOf(String value){
-    for (int i = -this.size(); i >= 0; i--) {
-      if (a[i].equals(value)) {
+
+    /*
+    for (int i = -this.size; i >= 0; i--) {
+      if (this.get(i).equals(value)) {
         return i;
       }
     }
     return -1;
+    */
   }
 
   public boolean equals(SuperArray other){
-    for (int i = 0; i < this.size(); i++) {
-      if (this[i] != other[i]) {
+    if (this.size() != other.size()) {
+      return false;
+    }
+    for (int i = 0; i < other.size(); i++) {
+      if (other.get(i) != this.get(i)) {
         return false;
       }
     }
@@ -56,11 +62,12 @@ public class Demo{
   }
 
   public static SuperArray zip(SuperArray a, SuperArray b){
+    SuperArray merge = new SuperArray();
     for (int i = 0; i < a.size(); i++) {
-      merge.add(a[i]);
-      merge.add(b[i]);
+      merge.add(a.get(i));
+      merge.add(b.get(i));
     }
-    return (merge.toString());
+    return merge;
   }
 
 }
