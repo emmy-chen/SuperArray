@@ -176,7 +176,7 @@ public class SuperArray {
   }
 
   public int lastIndexOf(String value){
-    for (int i = this.size(); i >= 0; i--) {
+    for (int i = this.size() - 1; i >= 0; i--) {
       if (this.get(i).equals(value)) {
         return i;
       }
